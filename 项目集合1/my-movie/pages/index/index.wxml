@@ -1,0 +1,11 @@
+<!--pages/index/index.wxml-->
+<view class="index-container">
+    <image class="logo" src='../../images/logo.png'></image>
+    <text class="username">hello,fajun!</text>
+    <view class="btn" >
+       <navigator url="../news/news" open-type='switchTab'> 
+           与音乐一起分享快乐时光
+       </navigator> 
+    </view>
+</view>
+

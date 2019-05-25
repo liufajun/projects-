@@ -1,0 +1,27 @@
+<template name="category">
+   <view class="category">
+      <view class='tea drink'>
+         <view class="drink-title">喜凡 <text class="circl">.</text> 奶茶</view>
+         <view class="line">
+            <view class="line-item1"></view>
+            <view class="line-item2"></view>
+         </view>
+         <view class="drink-text">
+            <text>品味生活</text>
+            <text>喜凡敬上</text>
+         </view>
+      </view>
+      <view class="coffe drink">
+          <view class="drink-title">喜凡 <text class="circl">.</text> 奶茶</view>
+         <view class="line">
+            <view class="line-item1"></view>
+            <view class="line-item2"></view>
+         </view>
+         <view class="space"></view>
+         <view class="drink-text">
+            <text>品味生活</text>
+            <text>喜凡敬上</text>
+         </view>
+      </view>
+   </view>
+</template>

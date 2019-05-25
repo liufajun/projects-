@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+    <style>
+        *{margin:0;padding: 0;}
+        .box{margin:5vw auto ;text-align: center;border: 1px solid blue;}
+        h2{margin-bottom: 30px;font-size:1.7;}
+        .box1{text-align: center;}
+        .a1{width:80%;margin:0 auto}
+        .a2{width:400px;}
+        .a3{width: 50%;height:50px;background:#2a8d70;line-height: 50px;margin:0 auto}
+        .b1{padding:0 20px;background: cadetblue;height:70px;}
+        .b1 .b2{width:33.333%;height:50px;line-height: 50px;float:left;
+        margin-top:10px;font-size:1.5vw;}
+        .c1{line-height: 70px;background: pink;}
+    </style>
+</head>
+<body>
+    <div class="box1 box">
+        <h2>子元素宽度设置为50%,则是离自己最近的父辈元素(必须是设置了宽度)的50%</h2>
+        <div class="a1">
+            <div class="a2">
+                <div class="a4">
+                    <div class="a3">width:100%</div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="box2 box">
+        <h2>父元素设置了左右间距,子元素设置百分比</h2>
+        <div class="b1">
+            <div class="b2" style="background:red;">b2-1</div>
+            <div class="b2" style="background:green;">b2-2</div>
+            <div class="b2" style="background:pink;">b2-3</div>
+        </div>
+    </div>
+    <div class="box3">
+        <h2>块级元素不设置高度的情况下,ling-height会生效</h2>
+        <div class="c1">
+            你是我的眼
+        </div>
+    </div>
+
+    
+</body>
+</html>

@@ -1,0 +1,97 @@
+注意：请用记事本打开
+
+开发工具：
+
+	1.weex: 2016年4月阿里巴巴发布的一款开源的跨平台移动开发工具
+
+前端UI框架：
+
+	UI: 接近原生APP体验的高性能前端框架，不依赖任何第三方JS库，压缩后的JS和CSS文件仅有100+K和60+K
+
+		以iOS平台UI为基础，补充部分Android平台特有的UI控件
+		
+		地址：http://dev.dcloud.net.cn/mui/	
+
+	element-ui:(vue.js ui组件库)是由饿了么UED设计、饿了么大前端开发的一套基于 Vue 2.0 的桌面端组件库。
+
+
+开发插件： 	
+		须知1：单页面应用大多采用前后端分离开发思路，我们知道，前端和后端交互有多中方式(服务器端渲
+
+			染、Ajax、websocket等)
+
+				1.vue.js插件
+
+	1.vue-resource: 是一个通过XMLHttpRequrest或JSONP技术实现异步加载服务端数据的Vue插件
+
+		提供了一般的 HTTP请求接口和RESTful架构请求接口，并且提供了全局方法和VUe组件实例方法。
+		
+		(作者已停止对该插件的更新维护)
+
+	2.axios: 是一个基于Promise 用于浏览器和 nodejs 的 HTTP 客户端，它本身具有以下特征：
+
+		从浏览器中创建 XMLHttpRequest
+
+		从 node.js 发出 http 请求
+
+		支持 Promise API
+
+		拦截请求和响应
+
+		转换请求和响应数据
+
+		取消请求
+
+		自动转换JSON数据
+
+		客户端支持防止 CSRF/XSRF
+
+	3.json-server: (模拟后端数据)
+
+		作为前端和客户端开发人员，在后端还没有给出对应的api接口时，我们无法做测试。 
+
+	  	这时，我们可以使用json-server快速搭建一个测试的api接口，能在几十秒之内搭建好。
+		
+		教程地址 https://blog.csdn.net/wangle_style/article/details/79455508
+	
+	4.mock.js: (数据模拟实现前后端分离)
+
+
+				2.js插件
+
+	1.lozad.js //懒加载
+
+	2.better-scroll 是一个移动端滚动的解决方案，它是基于 iscroll 的重写,
+
+		better-scroll也很强大，不仅可以做普通的滚动列表，还可以做轮播图、picker 等等。
+
+				
+				3.jQuery插件
+
+	1.jquery.pjax.js  //局部无刷新技术教程(就像路由跳转不翻页) 
+
+
+				4.滚动动画库
+	1.aos.js 。
+
+	2.scrollReveal.js (不依赖 animate.css，动画是用CSS3创建的，所以它不支持 IE10 以下的浏览器)
+	
+	3.scrollanim.css是使用 CSS3 + JavaScript 实现的用于创建滚动动画的库，应用到元素上后，当此元素
+
+		出现在浏览器可视区域时便会执行对应的动画，和之前介绍的 WOW.js及 scrollReveal.js类似。
+
+		Scrollanim 是Kissui的一部分，所以使用 Scrollanim 时需要用到 kissui.css。
+
+		Scrollanim 使用 Animate.css 为内置的动画库，你可以使用 Animate.css 里的任何一种动画。
+		
+		在元素上加上 data-kui-anim 属性，并写上相应的动画名称，即可现实动画效果。(很容易出错)
+	
+	 4.AnimateScroll.js  点击时才触发滚动效果
+
+	 5.wow.js (但只执行一次)
+
+	 6.Parallax.js 是一款功能非常强大的javascript视觉差特效引擎插件
+
+		
+
+

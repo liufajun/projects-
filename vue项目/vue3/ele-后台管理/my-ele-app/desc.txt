@@ -1,0 +1,483 @@
+1. 新建文件夹node-app,并在该文件夹下初始化package.json文件
+        npm init
+
+2. 在node-app文件夹下安装express框架
+        npm install express
+
+3.创建入口文件server.js(编写配置)
+
+4.在node-app文件夹下安装nodemon(server.js里代码更改时自动刷新)
+        npm install nodemon -g
+
+5.后台启动命令:
+         npm run server  
+
+6.启动server.js(在这里配置端口号)
+        npm run server 或 nodemon server.js
+
+        启动前后台输入 npm run dev (看package.json 配置)
+
+7.在浏览器输入： http://localhost:5001/，则会输出  res.send("hello world")里的内容
+
+8.配置mogoose数据库地址(新建config文件夹，并在该文件夹下创建keys.js文件)
+        module.export = {
+                mongooseURL: ""
+        }
+
+9.创建文件夹routes,在routes文件夹下创建api文件夹,在api文件夹下创建users.js文件(用于用户注册和登录)
+        并在该文件里编写路由配置和逻辑
+        ( 浏览器输入 http://localhost:5001/api/users/test 就会访问users(users.js)里的内容 )
+
+10.新建文件夹models,在该文件夹下创建User.js文件(用于把用户注册登录信息如姓名,邮箱,密码等信息存储到mongoose数据库),代码编写参考案例
+
+11.下载Postman并打开
+        可测试本地或远程接口：
+                例如测试本地接口：
+                        把 http://localhost:5001/api/users/test 粘贴到接口请求输入框，点击 send 按钮,则会在
+                        Body里输出本地接口里的内容(要注意你在代码里写的是什么请求就点击什么请求)，否则请求接口失败
+
+12.在api文件夹下的users.js文件里编写用户注册接口
+        用户注册接口需使用post请求方法,不能直接使用，需安装第三方模块 body-parser
+
+13.在 my-ele-app文件夹下安装 body-parser
+       1. npm install body-parser
+       2. 在server.js里引入body-parser
+                const bodyParser = require("body-parser");
+
+                // 使用body-parser中间件
+                app.use(bodyParser.urlencoded( {extended: false} ));
+                app.use(bodyParser.json());
+        
+14.安装密码加密库bcryptjs
+        bcryptjs是一个第三方密码加密库，是对原有bcrypt的优化，优点是不需要安装任何依赖
+
+15.安装全球头像gravatar
+
+        npm install gravatar
+
+        1.在users.js里引入gravatar
+        2.在Postman的body里email属性值需填写gravatar里注册时填写的邮箱
+                 // 根据在gravatar里注册时填写的邮箱来自动获取设置的头像
+                 const avatar = gravatar.url(req.body.email,{s:'200',r:'g',d:'mm'})
+
+16.安装jsonwebtoken(用于登陆,登陆成功会返回一个token)
+
+        npm install jsonwebtoken
+
+        1.users.js里引入jsonwebtoken
+        2. jwt.sign("规则","加密名字","过期时间",箭头函数)
+        3.keys.js里添加secret
+
+17.token验证,安装passport-jwt和passport
+
+        (使用文档：https://www.npmjs.com/package/passport-jwt)
+
+        npm install passport
+        
+        npm install passport-jwt
+
+        1.server.js里引入passport: 
+                const passport = require("passport");
+                //初始化passport才可使用
+                app.use(passport.initialize())
+        2.在config文件夹下新建passport.js文件(用于配置passport)
+
+18.token验证成功后测试一下能否获取用户注册时输入的信息
+
+        1.打开Postman
+        2.设置请求方式(与users.js里设置的请求方式要相同)
+        3.设置请求地址：http://localhost:9310/api/users/login
+        4.设置Headers
+                1.KEY: Content-Type
+                2.VALUE: application/x-www-form-urlencoded
+        5.设置Body
+                要选中x-www-from-urlencoded
+                KEY: email  VALUE: 361783@qq.com
+                KEY: PASSWORD  VALUE: 361783
+        6.点击Send按钮
+        7.复制打印出的token值
+        8.设置请求方式(与users.js里设置的请求方式要相同)
+        9.设置请求地址： http://localhost:9310/api/users/current
+        10.设置Headers
+                1.KEY: Authorization
+                2.VALUE: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjN
+                2QzNjQzYjBiYWU2MTUxY2EwMzQxMCIsIm5hbWUiOiLkv4rmsp8iLCJpYXQiOjE1NTE3
+                OTE4MTgsImV4cCI6MTU1MTc5NTQxOH0.dO3ALsRgcDhqAf-GgqmAiPJ58JAVQK0absU
+                JQ2S3tVk (token值)
+
+19.postman注册登录测试完整篇
+        1.填写注册接口的请求方式,接口地址,Header,x-www-form-urlencoded
+        2.填写注册信息key，value字段(用户信息字段:名字，邮箱，密码等)
+        3.点击Send输出用户信息(id,token等)
+        4.填写登录接口的请求方式,接口地址,Header,x-www-form-urlencoded
+        5.填写登录信息key，value字段(与注册信息key，value相同，就跟登录一样)
+        6.设置请求地址： http://localhost:9310/api/users/current
+        7.设置Headers
+                1.KEY: Authorization
+                2.VALUE: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjN
+                2QzNjQzYjBiYWU2MTUxY2EwMzQxMCIsIm5hbWUiOiLkv4rmsp8iLCJpYXQiOjE1NTE3
+                OTE4MTgsImV4cCI6MTU1MTc5NTQxOH0.dO3ALsRgcDhqAf-GgqmAiPJ58JAVQK0absU
+                JQ2S3tVk (token值)、
+
+/*信息配置*/
+
+20.编写信息模型，在models文件夹下新建Prohile.js文件(配置信息)
+        1.需引入到server.js里
+
+21.在routes > api文件夹下创建profiles.js
+        1.需引入到server.js里
+        2.创建信息接口: post   http://localhost:9310/api/profiles/add
+
+22.在profiles.js 
+        创建获取所有信息接口:   http://localhost:9310/api/profiles
+
+23.在profiles.js 
+        创建获取单个信息接口:   http://localhost:9310/api/profiles/:id
+
+24.在profiles.js 
+        创建编辑信息接口：http://localhost:9310/api/profiles/edit/:id
+
+25.在profiles.js 
+         创建删除信息接口：http://localhost:9310/api/profiles/delete/:id
+
+/*创建前端项目*/
+
+26.创建前端项目 vue create client
+
+27.my-ele-app目录下安装前后端连载插件：
+
+        cnpm install concurrently
+
+28.前端项目client里的package.json里配置启动命令：
+
+        "scripts": {
+                "serve": "vue-cli-service serve",
+                "build": "vue-cli-service build",
+                "lint": "vue-cli-service lint",
+                "start": "npm run serve" //添加这行
+        }
+
+29.在my-ele-app根目录下安装前后端连载插件：
+
+        concurrently: cnpm install concurrently -D
+
+30.在my-ele-app根目录下的package.json里配置前后端连载
+
+        "scripts": {
+                "test": "echo \"Error: no test specified\" && exit 1",
+                "client-install": "npm install --prefix client",
+                "client": "npm start --prefix client",
+                "socket": "nodemon webSocket.js",
+                "start": "node server.js",
+                "server": "nodemon server.js",
+                "dev": "concurrently \"npm run server\" \"npm run socket\" \"npm run client\""
+                /*
+                    npm run server: 运行后台代码命令(注意： 是在my-ele-app文件夹下运行)
+                    npm run client: 运行前端代码命令(client是项目名)
+                    npm run dev: 同时运行前端和后台代码命令
+                */
+        }
+
+31.public文件夹下新建css文件夹
+        1.css文件夹里新建reset.css文件
+        2.index.html里引入reset.css文件
+
+        
+32.分别创建index.vue(初始化页面),register.vue(注册),404.vue(找不到)文件
+
+33.在router.js中配置路由
+
+34.安装element-ui(看官网)
+
+35.Register.vue表单验证(使用element-ui组件)
+
+36.安装axios
+
+        cnpm install axios
+
+37.src目录下新建http.js文件
+
+        1.引入axios
+
+                import axios from 'axios'
+
+                /*
+                        1. import axios from 'axios'
+                        2. Vue.prototype.$ajax = axios;  // 将 axios 改写为 Vue 的原型属性
+                */
+
+38.main.js里引入http.js文件
+
+        import axios from './http' 
+
+        Vue.prototype.$axios = axios    
+
+39.http.js里导入加载动画,信息提示组件
+
+        import { Loading,Message } from 'element-ui';
+
+40.在client目录下新建配置文件vue.config.js文件(必须是这个名字),网上可查看配置内容
+
+41.创建登录页面Login.vue
+
+	在登录页面里获取token存储到本地localStorage
+
+42.router.js里添加路由守卫:(满足条件才能访问其他网页，否则输入地址也不能访问)
+        /**
+        * 添加路由守卫
+        * 根据本地存储的token来判断是否是登录，存在token则已经登录
+        * 
+        */ 
+	router.beforeEach((to, from, next) => {
+  		const isLogin = localStorage.eleToken ? true : false;
+		/**
+		* 如果访问的是登录或注册页面则可以正常访问这两个页面，否则访问其他页面则需判断token是否存在(是否登录),
+		* 如果已经登录则可以继续访问其他页面，否则跳转到登录页面
+		*/ 
+		if (to.path == "/login" || to.path == "/register") {
+			next();
+		} else {
+			isLogin ? next() : next("/login");
+		}
+	})
+
+43.http.js里的请求拦截里设置请求头
+
+	// 判断是否登录(登录成功才会有token)
+  	if (localStorage.eleToken) {
+    		// 设置统一的请求头(登录成功后其他接口就可以正常的使用token了)
+   		 config.headers.Authorization = localStorage.eleToken
+  	}
+
+44.http.js里处理响应拦截
+
+	错误状态401：表示token已过期
+
+	 // token过期无效则要清楚本地存储的token,然后跳转到登录页面
+  	if (status == 401) {
+   		 Message.error('token值无效，请重新登录')
+    
+    		localStorage.removeItem('eleToken')
+
+    		// 页面跳转
+    		router.push('/login')
+ 	}
+
+45.解析token(需安装jwt-decode)
+	1.在client目录下安装
+		cnpm install jwt-decode
+
+	2.Login.vue里引入jwt-decode
+
+		在script脚本里引入，放在最上面
+			import jwt_decode from "jwt-decode";
+
+                未解析的token:
+                        Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.e
+                        yJpZCI6IjVjODhmOGRlNDZlNWNlMmQ2ODg5NGI1MiIsIm
+                        5hbWUiOiLlkajmnbDkvKYiLCJhdmF0YXIiOiIvL3d3dyw
+
+                解析后的token格式:
+
+                        {
+                                avatar: "//www.gravatar.com/avatar/6fa38e8e91e5c1afed42f2dc29e74de1?s=200&r=g&d=mm"
+                                exp: 1552571537  
+                                iat: 1552567937
+                                id: "5c88f8de46e5ce2d68894b52"
+                                identity: "employee"
+                                name: "周杰伦"
+                        }
+
+46.把解析后的token存到vuex里(Login.vue)
+
+            /**
+             * 存储数据(把解析后的token存到vuex里,第一个参数是store.js里定义的)
+             * 判断decode是否为空,为空则没授权,不为空则授权
+             * 
+            */ 
+            this.$store.dispatch("setIsAutnenticated", !this.isEmpty(decode));
+            this.$store.dispatch("setUser", decode);
+
+47.解决登陆成功后刷新页面存储到vuex里的token数据消失问题
+
+        在根组件App.vue里处理(在生命周期函数里先判断本地是否存在token)
+
+48.创建HeadNav.vue组件
+
+        需引入到Index.vue里
+
+49.点击退出登录时
+
+        1.在store.js里的actions里设置为不授权,和清空用户数据
+
+        2.在HeadNav.vue(清除token,清空vuex里的user数据,最后跳转到login页面)
+
+                // 点击个人信息
+                showInfoList() {
+                        // 跳转到个人信息页面
+                        this.$router.push("/infoshow");
+                },
+                        // 点击退出登录
+                logout() {
+                        // 清除token
+                        localStorage.removeItem("eleToken");
+                        // 清空vuex里的user数据
+                        this.$store.dispatch("clearCurrentState");
+                        // 跳转到lotgin登录页面
+                        this.$router.push("/login");
+                }
+
+50.新建Home.vue(是Index.vue的子页面)
+
+        1.router.js里引入Home.vue,并配置路由
+
+51.新建infoShow.vue个人信息页面(是Index.vue的子页面)
+
+        1.router.js里引入infoShow.vue,并配置路由
+
+52.在components文件夹下创建LeftMenu.vue(左侧栏)组件
+
+53.在views文件夹下创建资金流水页面(CapitalFlow.vue)
+
+        1.定义获取数据方法(getProfile),在created周期函数里调用
+
+                this.$axios("/api/profiles").then(res => {
+                        //根据server.js里定义的接口获取数据
+                        console.log(res)
+                });
+
+        2.使用element-ui里的table组件
+
+                1.创建table主体(编辑和啥删除)
+
+                2.编写table头部区域(添加和根据时间筛选功能)
+
+
+54.在components目录下创建添加表格信息弹框Dialog.vue(点击添加按钮时弹出信息框)
+
+        1.使用dialog组件(里面包裹表单组件)
+                
+                1. 接收父组件CapitalFlow.vue里传过来的值dialog(true/false)来决定是否显示
+
+55.点击提交按钮把数据提交到后台
+
+        注意注意注意:
+
+                问题1: 在弹出框填写提交信息时，明明输入了内容却还提示内容为空，表单提交不了?
+
+                        弹框页面Dialog.vue是CapitalFlow.vue的子页面，在弹框Dialog.vue里输入的内容是属于父组件CapitalFlow.vue的而不是
+                        弹框Dialog.vue的,所以在输入框明明输入了内容却还提示为空，要想在弹框Dialog.vue里对输入的内容进行操作就得让父组件
+                        把用户输入的内容传给他
+
+                问题二2: 点击提交按钮信成功提交信息后页面却还没显示提交的信息,需要重新刷新一次页面才显示，因为页面没有自动更新，获取数据方法
+                        是在父组件写的，子组件可以使用 $emit 触发父组件的获取数据方法。
+
+                        1.在Dialog.vue里的点击提交事件了注册update
+
+                                this.$emit("update");
+
+                        2.在父组件CapitalFlow.vue里的弹框组件里触发父组件的获取数据方法
+
+                                <Dialog @update="getProfile"></Dialog>
+
+56.处理添加功能
+
+        编辑信息和添加信息都是共用Dialog.vue的页面(根据点击的是编辑按钮或添加按钮来设置弹窗对应信息)
+
+                1. //点击编辑按钮时,显示弹窗,设置相应的标题,标识(区分是编辑还是添加)
+                    this.dialog = {
+                         show: true,
+                         title: '添加资金信息',
+                         option: 'add'
+                    }
+
+               2. // 添加信息的时候输入框的内容为空
+                    this.formData = {
+                         type: "",
+                         describe: "",
+                         income: "",
+                         expend: "",
+                         cash: "",
+                         remark: "",
+                         id: ""
+                    }
+
+57.处理编辑功能
+
+        编辑信息和添加信息都是共用Dialog.vue的页面(根据点击的是编辑按钮或添加按钮来设置弹窗对应信息)
+
+                1. //点击编辑按钮时,显示弹窗,设置相应的标题,标识(区分是编辑还是添加)
+                    this.dialog = {
+                         show: true,
+                         title: '修改资金信息',
+                         option: 'edit'
+                    }
+
+               2. // 编辑信息时弹窗输入框显示点击编辑按钮对应的数据
+                    this. type: row.type,
+                         describe: row.describe,
+                         income: row.income,
+                         expend: row.expend,
+                         cash: row.cash,
+                         remark: row.remark,
+                         id: row._id
+                    }
+
+58.编辑和添加弹窗提交信息时
+
+         1.添加和编辑接口不一样,根据dialog.option来判断使用哪个接口,编辑接口要传递id,注意符号
+
+                onSubmit(form) {
+                        this.$refs[form].validate(valid => {
+                                if (valid) {
+                                        console.log(this.formData);
+                                        // 添加和编辑接口不一样,根据dialog.option来判断使用哪个接口,编辑接口要传递id,注意符号
+                                        const url = this.dialog.option == "add" ? "add" : `edit/${this.form.id}`;
+                                        //表单数据验证完成之后，提交数据;
+                                        this.$axios.post(`/api/profile/${url}`, this.formData).then(res => {
+                                            // 操作成功
+                                            this.$message({
+                                                    message: "添加成功！",
+                                                    type: "success"
+                                            });
+                                            this.dialog.show = false;
+                                            this.$emit("update");
+                                        });
+                                        }
+                                });
+                        }
+                }
+
+59.删除功能的实现
+
+        //点击删除按钮时删除对应行信息,根据id来删除
+        this.$axios.delete(`/api/profile/delete/${row._id}`).then(res => {
+            this.$message("删除成功");
+            this.getProfile();
+        });
+
+60.CapitalFlow.vue页面实现分页功能
+
+        1.设置分页数据方法
+
+                setPaginations () { }
+
+        2.输入框里选择每页显示的条数
+
+61.根据时间筛选数据
+
+62.设置用户权限
+
+63.项目打包上传到服务器
+
+        国内服务器要收费,国外有免费服务器(但要翻墙)
+
+
+
+
+
+                        
+
+
+
+

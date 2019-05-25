@@ -1,0 +1,22 @@
+webpack：一个资源打包工具，可以将css,js,img,less,sass,vue等文件当做一个模块来进行打包处理，
+         最终将这些打包好的的资源输出到一个.js文件中,将在系统中只需请求这个打包好的文件就可
+         实现所有的功能。
+    使用：
+        1.利用webpack将入口文件main.js依赖的模块js文件打包。(不打包浏览器识别不了main.js文件)
+           ((入口文件：就是html文件中要用到的模块--js文件 说简单点就是入口文件要
+           用到模块js文件中定义的函数方法,),可自定义入 口文件名，)。
+        2.利用webpack打包好生成后的build.js文件(可自定义文件名)在浏览器中运行。
+        3.注意：使用webpack打包工具时，创建项目文件夹, 名字自起, 但路径名不要包含中文, 以及项目名也
+               不要叫”webpack”, 并且不要包含大写字母。
+    包安装：npm install webpack (由于要使用webpack插件, 因此我们要进入到目录下重新下载一下webpack包)
+
+    插件安装：
+
+    打包(webpack全局安装时)：webpack main.js build.js  (进入到项目中输入打包命令将入口文件main.js打包到
+          build.js输出文件里-->输出文件默认是build.js(好像可以自定义文件名))。
+    webpack 命令和 webpack -w 命令区别 ：(好像也可以打包)
+                  webpack -w可以对项目打包并且实时监控, 当前配置文件下的文件如果发生更改时重新打包, 
+                  但如果webpack的配置文即webpack.config.js更改时还是要通过webpack进行打包。
+    打包(webpack非全局安装时):
+          需要额外指定其在node_modules中的地址，在终端中输入如下命令:
+                node_modules/.bin/webpack app/main.js public/bundle.js

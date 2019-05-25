@@ -1,0 +1,9 @@
+@import "../../movie-template/movie-template.wxss";
+.movieGridTemplate{
+    padding:30rpx 0;
+    height: 1300rpx;
+
+}
+.movieTemplate{
+    /* float: left; */
+}

@@ -1,0 +1,49 @@
+<!--pages/index/index.wxml-->
+<import src="../common-template/swiper-template/swiper.wxml" />
+<import src="../common-template/category-template/category.wxml" />
+<import src="../common-template/copyright-template/copyright.wxml" />
+<view class="swiper-wrapper">
+   <template is="swiper"></template>
+</view>
+<view class="category-wrapper">
+    <template is="category"></template>
+</view>
+<view class="about-company">
+   <view class="about-left">
+     <view class="about-img1">about图片1</view>
+     <view class="about-img2">about图片2</view>
+   </view>
+   <view class="about-right">
+      <text class="about-title">公司简介</text>
+      <view class="about-profile">
+         <view class="profile-box">
+            <view class="about-line"></view>
+            <view class="profile">COMPANY PROFILE</view>
+         </view>
+         <view class="about-more">+查看更多</view>
+      </view>
+      <view class="about-text">
+            安徽省喜凡食品有限公司生产基地位于安徽省芜湖市，公司目前主要生产针对市场差 异化的高冲杯奶茶，时光的流逝，如缓缓流过的小溪，再怎样努力也无法逆转它的方向；这个午               后，我站在开满丁香花的树下目送你走远，紫色的小花散发着幽幽的暗香，我忍不住深吸一             口气，你温情厚重的影子仿佛还在，余温尚存，这里因你目光的停留而变成一道让人心生欢快的风景！
+      </view>
+   </view>
+</view>
+<view class="wandering life">
+   <view class="wandering-header">
+       <text class="wandering-title">WANDERING LIFE,HIFUMI</text>
+       <view class="wandering-tag">漫生活<text>|</text>喜凡敬上</view>
+   </view>
+   <view class="hifumi clearfix">
+      <view class="hifumi-item1">hifuni-item1</view>
+      <view class="hifumi-item2">hifuni-item2</view>
+      <view class="hifumi-item3">hifuni-item3</view>
+      <view class="hifumi-item4">hifuni-item4</view>
+      <view class="hifumi-item5">hifuni-item5</view>
+      <view class="hifumi-item6">hifuni-item6</view>
+      <view class="hifumi-item7">hifuni-item7</view>
+   </view>
+
+</view>
+<view class="copyright-wrapper">
+    <template is="copyright"></template>
+</view>
+

@@ -1,0 +1,35 @@
+<!--pages/category/index.wxml-->
+<view class='caregory'>
+    <!-- 分类左侧导航栏 -->
+    <scroll-view class="nav_left" scroll-y>
+        <block wx:for="{{navLeftItems}}" wx:key="index">
+        <!-- 
+            1.如果curIndex == index,则该元素添加class类名nav_left_item-active,否则class为空；
+            2.index就是wx:for遍历数据时自己的index,这里的两个index都一样
+        -->
+            <view class="nav_left_items {{curIndex == index ? 'nav_left_item-active' : ''}}" data-index="{{index}}" bindtap="switchLeftTab">
+                {{item}}
+            </view>
+        </block>
+    </scroll-view>
+    <!-- 分类右侧显示区域 -->
+    <scroll-view class='nav_right' scroll-y>
+        <!-- 如果navRightItems有数据 -->
+        <view wx:if='{navRightItems[curIndex]' style='padding-bottom: 10px;'>
+        <!-- 根据下标index获取对应数据 -->
+            <block wx:for="{{navRightItems[curIndex]}}" wx:for-item="item" wx:key="item">
+                <view class='jd-category'>
+                    <view class='title'>{{item.title}}</view>
+                    <view class='jd-category-wrap'>
+                        <block wx:for="{{item.desc}}" wx:for-item="list" wx:key="list">
+                            <view class='jd-category-style' data-txt="{{list.text}}" bindtap='showListView'>
+                                <image class='list_img' src='{{list.img}}'></image>
+                                <text class='list_text'>{{list.text}}</text>
+                            </view>
+                        </block>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </scroll-view>
+</view>

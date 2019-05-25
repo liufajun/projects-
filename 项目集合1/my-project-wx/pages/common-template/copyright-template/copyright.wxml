@@ -1,0 +1,5 @@
+<template name="copyright">
+   <view class="copyright">
+      技术支持: 中山食联网络信息技术有限公司
+   </view>
+</template>

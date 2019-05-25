@@ -1,0 +1,3 @@
+@import "news-template/news-template.wxss";
+swiper-item{width:100%;}
+swiper-item image{width:100%;}

@@ -1,0 +1,13 @@
+<template name="swiper">
+   <swiper indicator-dots='true' autoplay='true' interval='5000' duration='1200'>
+      <swiper-item>
+         <image src="../../images/banner1.jpg"></image>
+      </swiper-item>
+      <swiper-item>
+         <image src="../../images/banner2.jpg"></image>
+      </swiper-item>
+      <swiper-item>
+         <image src="../../images/banner3.jpg"></image>
+      </swiper-item>
+   </swiper>
+</template>

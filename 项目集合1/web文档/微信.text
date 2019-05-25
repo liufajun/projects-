@@ -1,0 +1,576 @@
+﻿注意：豆瓣电影详情页电影信息的相关字段可能会发生改变,如不能获取相关数据可能需要修改相关字段
+app.json文件:
+      {
+        // 当前小程序所有页面路径
+        "pages": [
+          //page配置中的第一项将默认为入口页面(即首页或主页)
+          "pages/index/index",
+          "pages/logs/logs",
+          "pages/news/news"
+        ],
+        // 用于设置小程序的状态栏、导航条、标题、窗口背景色。
+        "window": {
+          // 顶部导航栏文字
+          "navigationBarTitleText": "首页",
+          // 导航栏背景颜色
+          "navigationBarBackgroundColor": "#000",
+          // 顶部导航栏标题颜色，仅支持 black/white
+          "navigationBarTextStyle": "white",
+          // 下拉 loading 的样式，仅支持 dark/light
+          "backgroundTextStyle": "dark",
+          // 窗口的背景色
+          "backgroundColor": "#fff"
+        },
+        // 指定底部tab 栏的表现，以及 tab 切换时显示的对应页面。
+        "tabBar": {
+          // 底部tab栏字体颜色
+          "color": "#000",
+          // 底部tab栏点击选中时字体颜色
+          "selectedColor": "#f60",
+          背景颜色
+          "backgroundColor": "#ccc",
+          // 边框颜色
+          "borderStyle": "black",
+          // tabBar 中的 list 是一个数组，只能配置最少2个、最多5个 tab，tab 按数组的顺序排序。
+          "list": [
+            {
+              "pagePath": "pages/index/index",
+              "text": "首页",
+              "iconPath": "images/home.png",
+              "selectedIconPath": "images/home_selected.png"
+            },
+            {
+              "pagePath": "pages/logs/logs",
+              "text": "列表",
+              // 默认图片
+              "iconPath": "images/news.png",
+              // 点击选中时默认图片变为这个 
+              "selectedIconPath": "images/news_selected.png"
+            }
+          ]
+        },
+        // 设置网络超时时间
+        "networkTimeout": {
+          "request": 10000,
+          "downloadFile": 10000
+        },
+        // 设置是否开启 debug 模式
+        "debug": false
+      }
+bind绑定事件:(除这些事件外的其他事件都是非冒泡事件)通过bind绑定事件则会冒泡
+
+    bindtap:手指触摸离开后事件
+    bindlongtab:触摸长按350ms后离开事件
+    bindtouchend:触摸结束
+    bindtouchecancel:触摸动作被打断事件(如:来电，弹窗等)
+    bindtouchstart:手指开始触摸事件
+    bindtouchmove:触摸移动事件
+
+catch绑定事件:通过catch绑定事件则不会冒泡
+
+    catchtap:
+    .........(同上)
+
+cursor:pointer属性:微信中设置cursor:pointer;属性则在点击时会出现高亮
+
+文件导入：include 和import
+
+   1. <include src="" />: 导入的是整个文件(好像大都是导入wxml文件)不能有
+        template模板标签，否则不显示
+
+
+        footer.wxml文件：(这里的template标签要闭合)
+
+            <template name="isHeader">这是头部</template>
+            
+            <template name="isFooter">这是底部</template>
+
+
+   2. import: 导入的是wxml文件里的某个template模板。
+
+            // 导入footer.wxml文件里的isFooter模板
+            <import src="../footer" />
+            
+            // is的属性值就是导入的模板template标签里的name值
+            <template is="isFooter"></template>
+
+页面传值：通过问号传值,值可自定义(这里的参数是后端接口中的参数)，传多个值通过&符号连接
+
+        <navigator url="../list/list?type=in_theathers&tittle=正在上映"  hover-class='navigator-hover'>
+        
+        </navigator>
+
+        然后在上面要跳转的js文件中通过onLoad函数获取：
+
+              onLoad: function (params) {//参数params指获取的值
+                // console.log(params)
+                
+              }
+
+注意-1:
+
+      scroll-into-view=" "  值应为某子元素id（id不能以数字开头）。让指定的子元素距离其顶部为0(显示在最前面)。
+
+      scroll-top=" 值为number类型"  竖向滚动条距离顶部距离。
+
+      (这两个属性一起使用则只有scroll-top属性生效,scroll-top属性优先于scroll-into-view属性,不要一起使用这两个属性)
+
+
+路由跳转：
+	onTap:funxtion(){
+          
+      //在顶部导航栏中会有返回箭头按钮，只能返回5个层级页面，超过5个则不能返回
+              wx.navigateTo({
+
+      url:"../posts/post",
+      
+      //成功跳转后执行
+      success: function(res){
+
+      
+      },
+      //跳转失败后执行
+      fail: function(res){
+
+      
+      },
+      //不管跳转成功还是失败都会执行
+      complete: function(res){
+
+      
+      }
+
+	  });
+
+	   //在顶部导航栏中不回出现返回箭头按钮(不能返回上一个页面)，只能返回5个层级，超过5个则不能返回
+	   //参数同上
+            wx.redirecTo({
+
+              url:"../posts/post"
+
+                })
+
+            }
+	
+注意：template是单双标签要有name属性，被导入到其他页面时要添加is属性(is属性值要与name属性值相同)，模板通过
+<import src="../stars/stars-template.wxml" /> 标签导入。
+
+模板template编写是从里往外(从小到大)嵌套
+
+数据绑定是从外往里编写(template元素好像要通过data={{movies}}把数据绑定到外层元素上，其他元素直接例如:id="{{items}}")
+
+//设置头部导航条wx.setNavigationBarTitle要在页面渲染完成生命周期函数中使用onReady:function(){}
+
+在template模板标签中添加class无效
+
+display:flex与scroll-view组件一起使用时,scroll-view会失效(所以用float),scroll-y需设置高度，否则不生效
+
+页面传值：(比如跳转到详情页或对应的页面,路径后面带参)
+
+      1.在标签里设置点击事件函数(通过bindtap=""或catchtap="")
+        
+      2.在标签里通过data自定义属性设置：data-newsId="{{item.newsId}}"
+
+          把绑定的数据赋给自定义属性data-newsId
+
+          例如： <view class="to-news-detail" bindtap='goNewsDetail' data-newsId="{{item.newsId}}"></view>
+
+      3.在js文件里添加bindtap点击事件函数（bindtap=""里的函数名相同）,存放位置与生命周期函数平级，该函数需带事件对象参数event
+          
+          goNewsDetail: function (event) {
+  
+
+          }
+
+      4.点击的时候获取相对应页面的标识:
+
+          dataset：标签里的data属性的集合(data-xx="可以是个对象")
+
+                  获取 data-newsId="{{item.newsId}}"的值需通过dataset.newsId(这里的newsId就是data-后缀值)
+
+          获取点击的那个对象对应的页面的标识需通过：event.currentTarget.dataset.newsid 来辨别
+          注意注意：dataset获取的是标签里的data-xx中的属性值--dataset.newsid中的newsid就是
+          data-newsId="{{item.newsId}}"里的newsid
+
+          goNewsDetail: function (event) {
+                var newsId = event.currentTarget.dataset.newsid;
+                console.log(event)
+                wx.navigateTo({
+                  //路径问号后的参数名newsId可自定义
+                  url: 'news-detail/news-detail?newsId=' + newsId
+                })
+          }
+        
+      5.在要跳转到的指定页面里接受传过来的参数(点击跳转时会把参数传过去),在onLoad生命周期函数里获取
+
+          即在news-detail.js里的生命周期函数里(参数可自定义)，通过函数里的参数options.newsId获取传过来的值
+          options.newsId中的newsId是路径问号后的参数名newsId
+
+                  onLoad: function (options) {
+
+                      console.log(options.newsId)
+                  }
+
+      6.在要跳转到的指定页面里(详情页)获取数据(引入本地数据文件)，这里获取的是本地数据，通过传过来的id获取它对应的数据,
+      如果是服务器端的数据好像是通过wx.request({})获取
+
+          var newsData = require("../../data/news-data.js");
+
+           this.setData({
+              detailData: newsData.newsData[options.newsId]
+          })
+          与
+          this.setData(newsData.newsData[options.newsId]);//这样写可以直接绑定对象里的直接儿子属性例如:{{title}}
+
+
+      7.小程序缓存：
+
+                // 缓存:在小程序中，如果用户不主动清除，则一直存在，缓存最大上限10M
+                // 同步
+                // wx.setStorageSync('key', "哈哈哈");
+                // 修改缓存
+                // wx.setStorageSync('key', {
+                //   game:"穿越火线",
+                //   dev:"timi"
+                // })
+                // //获取缓存
+                // var myData = wx.getStorageSync("key");
+                // console.log(myData);
+                // 删除缓存
+                // wx.removeStorageSync('key');
+                // 清除所有缓存
+                // wx.clearStorageSync();
+                // 缓存存储数据值得格式
+                // var newsCollected = {
+                //   0:true,
+                //   1:false
+                // }
+
+      8.页面跳转的类型：(注意:跳转到底部tabBar页面用wx.navigateTo不会生效,跳转到tabBar页面要在navigator标签里要设置
+      open-type="switchTab")
+
+            1.wx.navigateTo(OBJECT)：保留当前页面，跳转到应用内的某个页面，使用wx.navigateBack可以返回到原页面。
+
+            2.wx.redirectTo(OBJECT)：关闭当前页面，跳转到应用内的某个页面。
+
+            3.wx.reLaunch(OBJECT)：关闭所有页面，打开到应用内的某个页面。
+
+            4.wx.switchTab(OBJECT)：跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面
+
+      9.引入本地js数据文件:
+
+        1.js文件格式:
+
+            var data = [
+              {
+                newsid: 0,
+                time: "5/23 16:15"
+              },{
+
+              }
+            ]
+            //需要模块化导出
+            module.exports = {
+                newsData: data
+            }
+
+        2.在需要调用数据的js文件里引入数据文件：
+
+          var newsData = require("../tmp/app.js");
+
+        3.添加数据到当前js文件里的data对象里：
+
+          data{
+            getData:""
+          }
+
+        4.在生命周期函数里设置数据：
+
+          onLoad: function (options){
+              this.setData({
+                getData:newsData.data
+              })
+          }
+
+10.网络请求,一般会封装到一个方法里方便调用:(获取网络请求数据是res.data)
+
+  注意：在success回调函数中设置数据要注意this指针：(在wx.request({})外部声明this, var that = this;)
+
+       that.setData({
+            movie: temp
+        })
+        console.log(that.data.movie)
+
+      wx.request({
+
+              url: "https://douban.uieee.com/v2/movie/in_theaters", 
+              method:"GET",
+              header: {
+                'content-type': 'application/xml' 
+              },
+              success: function (res) {
+                console.log(res.data)
+                //可通过回调函数在外面写逻辑(可在与生命周期函数平级的地方编写回调函数),回调函数需带参数(即success函数里的参数res))
+                //callback(res.data)
+              }
+      })
+
+      例如：
+
+          callback: function (res) {
+              // console.log(res)
+              // 获取需要的数据：评分，大图，星星，id,标题
+              var movies = [];
+              // 遍历数据中的subjects(上面调用该方法是传了参数res.data，这里相当于res.data.subjects)
+              for( var idx in res.subjects ){
+                  var subject = res.subjects[idx];
+                  var title =  subject.title;
+                  // 标题名字过长超出6个字符则以...代替
+                  if( title.length >=6 ){
+                      title = title.substring(0,6) + "..."
+                  }
+                  // 把获取的数据放入temp中
+                  var temp = {
+                      title: title,
+                      coverageUrl: subject.images.large,
+                      star: "",
+                      average: subject.rating.average,
+                      movieid: subject.id
+                  }  
+                  movies.push(temp);
+              }
+              console.log(movies)
+              //把遍历获取的数据存入data中
+              this.setData(movies)
+          }
+
+  11.把数据渲染到view视图上:(在template标签里是通过 data="{{...top250}}" 绑定数据)
+
+      注：数据传递是从外往里(data="{{...top250}}"),把展开的数据(如果是对象)继续往里传递
+
+      1.可在wx.request({})里的success函数里获取服务端数据,要通过 res.data.属性名 获取,或者在外部
+        回调函数中获取数据(可参考上面例子)
+      2.通过this.setData({data:newsData})或this.setData(newsData)把数据存入data({})对象中,这样就可以
+        在视图中通过 data="{{top250}}" 把数据渲染到页面上
+      3.如果data={{top250}} 中的数据是个对象可以通过es6语法把对象里的数据给展开： data="{{...top250}}"
+        这样就可以直接对象里的：<view>{{top250.title}}</view>,而不用<view>{{top250.title}}</view>
+
+  
+  12.template使用：template好像单双标签都可以，要有name属性，被导入到其他页面时要添加is属性(is属性值要与name属性值相同)，模板通过
+    <import src="../stars/stars-template.wxml" /> 标签导入。并在加上<template is=""></template>。
+    模板嵌套(一般从里往外，从大到小嵌入)
+
+  13.引入wxss文件:
+        @import "../movie-template/movie-template.wxss"; (注意：需加上分号)
+
+  14.视图之间的数据传递:
+
+      父元素在自己的js中获取到服务端数据即可绑定到自己的视图层上,把数据传给子元素好像要在template标签里
+      通过data="{{datas}}"来传递到自页面里
+
+      例如：
+          <import src="movie-list-template/movie-list-template.wxml" />
+          <view class="movie-page">
+              
+                  <!-- 把data对象中的电影数据movies绑定到元素上 -->
+                  <template is="movieListTemplate" data="{{...comingSoon}}" ></template>
+                  <template is="movieListTemplate" data="{{...inTheaters}}"> </template>
+                  <template is="movieListTemplate" data="{{...top250}}"> </template>
+            
+          </view>
+
+    15.三元表达式与wx:if
+
+          <image wx:if="{{i}}" src="/images/star.png"></image>
+          <image wx:else src="/images/chat.png"></image> 
+          
+          <image src="{{i ? '/images/star.png' : '/images/chat.png' }} "></image>
+
+    16.头部导航条加载动画：
+
+        wx.showNavigationBarLoading();(在生命函数里编写)
+
+        // 加载完数据后再隐藏头部导航条加载动画(否则会一直旋转)
+        wx.hideNavigationBarLoading();
+
+    17.onPageScroll(Object) :页面在垂直方向已滚动的距离（单位px）
+
+    18.下拉刷新
+
+        1.在对应的json文件例如：list.json文件
+
+            {
+                //设置为true
+                "enablePullDownRefresh": true, 
+                //设置黑色下拉刷新动画(三个小圆点)
+                "backgroundTextStyle": "dark"
+            }
+
+        2.list.js文件
+            data: {
+                prolist: [],
+                page: 1, // 当前请求的page
+                size: 5, // 请求数据的size
+                noData: false // 是否有更多数据
+            },
+            onPullDownRefresh: function () {
+                // 请求数据
+                wx.showNavigationBarLoading() //在标题栏中显示加载动画(旋转动画)
+                //下拉刷新时会显示暂无更多数据区域,需还原(重新更新数据)，开关设置为false
+                this.setData({
+                    page: 1,
+                    noData: false
+                })
+                const self = this
+                wx.request({
+                url: interfaces.productionsList,
+                success(res) {
+                    self.setData({
+                    prolist: res.data
+                    })
+                    // 隐藏标题栏中加载状态
+                    wx.hideNavigationBarLoading();
+                    // 停止下拉刷新动画(三个小圆点)
+                    wx.stopPullDownRefresh();
+                }
+                })
+            },
+
+    19.上拉加载
+
+        1.list.js文件
+            data: {
+                prolist: [],
+                page: 1, // 当前请求的page
+                size: 5, // 请求数据的size
+                noData: false // 上拉触底无数据时显示
+            },
+            onReachBottom: function () {
+                // 判读数据是否加载完毕
+                if (this.data.noData) return
+                
+                // 首先停止下拉刷新
+                wx.stopPullDownRefresh();
+                wx.showNavigationBarLoading() //在标题栏中显示加载
+
+                const prolist = this.data.prolist
+                let page = this.data.page
+                this.setData({ 
+                    // 每次下拉页数加一page+1
+                    page: ++page
+                })
+                const self = this
+                wx.request({
+                // 请求路径是这样
+                url: interfaces.productionsList + '/' + self.data.page + '/' + self.data.size,
+                success(res) {
+                    // 没有数据时
+                    if (res.data.length == 0) {
+                    self.setData({
+                        noData: true
+                    })
+                    } else {
+                    //遍历数据
+                    res.data.forEach(item => {
+                        prolist.push(item)
+                    })
+                    self.setData({
+                        prolist: prolist
+                    })
+                    }
+                    // 隐藏加载状态
+                    wx.hideNavigationBarLoading()
+                }
+                })
+            },
+
+    20.创建组件
+
+        1.右击list目录(谁便指定一个目录)，点击新建Component ,在输入框里输入组件名(自己定义),生成的组件包含js,wxcss,json,wxml文件
+
+    21.引入组件(例如在list.json里引入)
+        
+        {
+            "usingComponents": {
+                // key(自定义的组件名),value(组件路径)
+                "infocell": "/components/infocell/index",
+                "IOU": "/components/IOU/index",
+                "buy": "/components/buy/index"
+            }
+        }
+
+    22.使用组件
+
+        1.infocell.js(组件js)
+            /**
+                * 组件的属性列表
+                * 组件的属性列表的值获取方式: this.data.title
+            */
+            properties: {
+                title: { 
+                    type: String, // 类型（必填），目前接受的类型包括：String, Number, Boolean, Object, Array, null（表示任意类型）
+                    value: '' // 属性初始值（可选），如果未指定则会根据类型选择一个
+                },
+                desc: {
+                    type: String,
+                    value: ''
+                }
+            },
+
+        2.infocell.wxml(组件属性可绑定在该组件里的标签里)
+
+            <text class='title'>{{title}}</text>
+            <text class='desc'>{{desc}}</text>
+
+        3.在其他页面(父页面)list.wxml引入组件时，组件属性可绑定在该组件上接收其他页面传过来的值
+
+            // 属性title,desc是在组件infocell(infocell.js)里定义的
+            <infocell title='支付' desc='{{baitiaoSelectItem.desc}}'     bind:popView='popBaitiaoView'></infocell>
+
+    23.子组件的事件传递(父组件执行子组件的事件方法)
+
+        1.infocell.wxml里定义绑定事件
+
+            <text class='icon' bindtap='popView'>...</text>
+
+        2.infocell.js里注册绑定事件
+
+            methods: {
+                popView: function () {
+                    this.triggerEvent('popView')
+                }
+            }
+
+        3.在父组件list.wxml里引入的子组件标签里定义子组件事件popView的执行方法popBaitiaoView(自定义)
+
+             <infocell title='支付' desc='{{baitiaoSelectItem.desc}}'     bind:popView='popBaitiaoView'></infocell>
+
+        4.在父组件list.js里声明子组件事件popView的执行方法popBaitiaoView(与生命周期函数同级)
+
+
+        currentTarge,target区别总结：
+        
+            e.currentTarget.dataset 代表的是，注册了监听点击事件的组件。在本例中，就是外层的View（包含了两个TextView）.
+
+            e.target.dataset 代表的是，实际触发了点击事件的组件。
+
+
+    24.满足条件让图片地址更换
+
+        <image src="{{item.select?'/image/selected.png':'/image/unselect.png'}}"></image>
+        <image src="{{item.select?yespic:nopic}}"></image>
+
+    25.组件嵌套多层传值(由内往外)
+
+        amount传值给父组件buy,组件buy有传值给父组件detail
+
+    26.手指触摸事件
+
+            <view class="del" bindtouchstart="touchstart" bindtouchmove="touchmove" ></view>
+
+            touchstart事件：当手指触摸屏幕时候触发，即使已经有一个手指放在屏幕上也会触发。
+
+            touchmove事件：当手指在屏幕上滑动的时候连续地触发。在这个事件发生期间，调用preventDefault()事件可以阻止滚动。
+            
+            touchend事件：当手指从屏幕上离开的时候触发。
+

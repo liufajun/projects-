@@ -1,0 +1,47 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/product/product",
+    "pages/news/news",
+    "pages/contact/contact"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"#fff"
+  },
+   "tabBar": {
+      "color": "#333",
+      "selectedColor": "#f60",
+      "backgroundColor": "#fff",
+      "borderStyle": "black",
+      "list": [
+         {
+            "pagePath": "pages/index/index",
+            "text": "首页",
+            "iconPath": "images/shouye.png",
+            "selectedIconPath": "images/gouwu.png"
+         },
+         {
+            "pagePath": "pages/product/product",
+            "text": "喜凡产品",
+            "iconPath": "images/dianyin.png",
+            "selectedIconPath": "images/dianyin.png"
+         },
+         {
+            "pagePath": "pages/news/news",
+            "text": "喜凡新闻",
+            "iconPath": "images/zhuanshi.png",
+            "selectedIconPath": "images/zhuanshi.png"
+         },
+         {
+            "pagePath": "pages/contact/contact",
+            "text": "热线",
+            "iconPath": "images/wode.png",
+            "selectedIconPath": "images/wode.png"
+         }
+      ]
+   }
+   
+}

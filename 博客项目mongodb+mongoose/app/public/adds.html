@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			.form{
+				width: 85%;margin: 0 auto;
+			}
+			
+			.form .form-item{
+				display: flex;align-items: center;height: 50px;width:100%;margin-bottom: 20px;position: relative;
+			}
+			.form .form-item span{
+				display: inline-block;width: 100px;height:100%;border: 1px solid green;
+				margin-right: 5%;text-align: center;line-height: 50px;
+			}
+
+			.form .form-item input{
+				flex: 1;outline: none;border: 1px solid green;height: 100%;
+			}
+			
+			textarea{
+				height: 400px;outline: none;position: absolute;top: 0;right: 0;width:calc( 95% - 100px );box-sizing: border-box;
+				border: 1px solid green;padding: 20px;
+
+			}
+			.submit-btn{
+				width: 100%;
+			}
+			.submit-btn button{
+				margin: 0 auto;border: none;background-color: #f50;padding: 10px 30px;border-radius: 3px;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<form class="form" action="/save_add.html" method="post">
+			<div class=" form-item">
+				<span class="form-item-title">标题</span>
+				<input type="text">
+			</div>
+			<div class="form-item">
+				<span class="form-item-title">作者</span>
+				<input type="text">
+			</div>
+			<div class="form-item">
+				<span class="form-item-title">来源</span>
+				<input type="text">
+			</div>
+			<div class="form-item ">
+				<span class="form-item-title">内容</span>
+				<textarea ></textarea>
+				
+			</div>
+			<div class="submit-btn">
+				<button type="submit">提交</button>
+			</div>
+		</form>
+		
+	</body>
+</html>

@@ -1,0 +1,7 @@
+<!--components/infocell/index.wxml-->
+<view class='payWrap'>
+  <text class='title'>{{title}}</text>
+  <text class='desc'>{{desc}}</text>
+  <!-- 子组件的事件传递,让父组件执行子组件事件 -->
+  <text class='icon' bindtap='popView'>...</text>
+</view>

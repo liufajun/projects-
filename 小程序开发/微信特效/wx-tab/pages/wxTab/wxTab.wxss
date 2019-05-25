@@ -1,0 +1,50 @@
+/* pages/wxTab/wxTab.wxss */
+.swiper-tab {
+  width: 100%;
+  text-align: center;
+  line-height: 80rpx;
+  background-color:white;
+}
+.swiper-tab-list {
+  font-size: 30rpx;
+  display: inline-block;
+  width: 25%;
+  color: #777;
+  border-bottom: 0rpx;
+}
+.on {
+  color: #da7c0c;
+  border-bottom: 6rpx solid #da7c0c;
+}
+.swiper-box {
+  background:pink;margin-bottom:40px;height:300px;
+}
+.swiper-box view {
+  text-align: center;
+}
+
+/* .swiper-box2切换样式  */
+.navbar{
+  flex: none;
+  display: flex;
+  background: #fff;
+}
+.navbar .item{
+  position: relative;
+  flex: auto;
+  text-align: center;
+  line-height: 80rpx;
+}
+.navbar .item.active{
+  color: #FFCC00;
+}
+.navbar .item.active:after{
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4rpx;
+  background: #FFCC00;
+}

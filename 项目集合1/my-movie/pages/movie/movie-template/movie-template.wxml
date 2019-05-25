@@ -1,0 +1,11 @@
+<import src="../star-template/star-template.wxml" />
+<template name="movieTemplate">
+    <view class="movie-container" catchtap="goMovieDetail" data-movieid="{{movieId}}">
+    
+    <!-- item已展开，所以不用item.title这样写 -->
+        <image class="movie-img" src="{{coverageUrl}}"></image>
+        <text class="movie-title">{{title}}</text>
+        <!-- data里的属性名是自定义的,属性值是js文件中获取的远程数据 -->
+        <template is="starTemplate" data="{{average:average,stars:stars}}"></template>
+    </view>
+</template>

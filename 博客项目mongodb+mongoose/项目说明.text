@@ -1,0 +1,63 @@
+个人博客项目：node.js + express + mongodb + mongoose
+
+	1.通过应用生成器工具 express-generator 可以快速创建一个应用的骨架。
+	
+		npm install -g express-generator
+	
+	2.安装express
+	
+		//项目目录下安装
+		npm install express --save
+	
+	
+	
+	3.通过express 创建一个名为app的项目模板
+	
+		express -e app
+		
+	4.安装依赖(需进入项目目录app)
+	
+		cnpm install
+		
+	5.安装mongoose (需进入项目目录app)
+		
+		npm install mongoose  --save 
+		
+	6.连接数据库
+	
+		6-1.开启mongodb服务
+		
+			net start mongodb
+
+		6-2.进入mongodb安装目录下的bin目录开启数据库管理模式
+
+			1.cmd命令进入C:\Program Files\MongoDB\Server\4.1\bin
+
+			2. cmd命令执行 mongo
+		
+		6-3.引入mongoose模块
+		
+			let mongoose = require('mongoose');
+			
+		6-4.在app\routes\index.js文件里编写连接数据库代码
+		
+
+		6-5.cmd命令进入app项目目录下执行 node app 连接数据库
+
+	7.操作数据库
+
+		7-1.定义骨架Schema
+
+			let schema = new mongoose.Schema({
+				字段名: 类型,
+				字段名: 类型,
+			})
+
+		7-2.创建模型(根据骨架创建,一般用于读取数据)
+			
+	8.浏览器上运行项目
+
+		在浏览器地址栏输入 localhost(本地) 再按回车键即可在浏览器上显示
+		
+			
+	

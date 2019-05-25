@@ -1,0 +1,30 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/second/second",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "demo",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "selectedColor": "#90EE90",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "第一方式",
+        "iconPath": "pages/images/iv1.png",
+        "selectedIconPath": "pages/images/iv2.png"
+      },
+      {
+        "pagePath": "pages/second/second",
+        "text": "第二方式",
+        "iconPath": "pages/images/iv3.png",
+        "selectedIconPath": "pages/images/iv4.png"
+      }
+    ]
+  }
+}

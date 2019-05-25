@@ -1,0 +1,13 @@
+<view>
+  <block wx:for="{{list}}" wx:key="listKey">
+    <view class="myView">
+      <image class="image" src="{{item.thumbnail}}"></image>
+      <view class="title">{{item.ctgTitles}}</view>
+      <view class="body">{{item.name}}</view>
+    </view>
+  </block>
+</view>
+<view class="line" hidden="{{line_h}}">--别太放肆，我是有底线的--</view>
+<loading hidden="{{load_h}}" bindchange="loadingChange">
+  加载中...
+</loading>

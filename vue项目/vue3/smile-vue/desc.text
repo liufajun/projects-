@@ -1,0 +1,262 @@
+Easy Mock账号：liufajun
+Easy Mock密码：liufajun1993
+Easy Mock数据接口地址: https://www.easy-mock.com/project/5cd983e0eebf633b5de54c57
+
+
+(创建后端)
+
+1.在项目根目录下创建service文件夹，cmd进入该文件夹
+
+2.创建package.json文件： npm init -y
+
+3.安装koa: npm install koa --save   (安装到生产环境中)
+
+4.service文件夹下新建index.json文件：
+
+    const Koa = require("koa")
+    const app = new Koa()
+
+    app.use(async(ctx) => {
+        ctx.body = '<h1>Hello koa2</h1>'
+    })
+
+    app.listen(3000,()=>{
+        console.log("serve staring at port 3000")
+    })
+
+5.在终端运行index.js文件: node index.js
+
+6.在浏览器输入http://localhost:3000
+
+    能显示 Hello koa2
+
+7.下载安装mongodb
+
+    7-1: 配置环境变量：
+
+    7-2: 运行mongodb
+
+            1.cmd命令进入 C:\Program Files\MongoDB\Server\4.1\bin 下
+
+            2. 输入mongod命令 (如果不报错则成功安装mongodb)
+
+
+8.进入到后端目录service下安装mongoose(需通过mongoose才能操作数据库): 
+
+             npm install --save mongoose
+
+9.service文件夹下新建database文件夹,该文件夹下创建init.js(用于数据库操作)
+
+10.连接数据库: 进入到后端目录service下运行命令  node index.js
+
+        出现 MongoDB connected successfully 则数据库连接成功
+
+11.database文件夹下创建scheme文件夹,并在schema文件夹下创建User.js文件
+
+    注意： User.js文件的前缀User尽量跟数据库表名字相同
+
+    注意： 后端代码每次发生改变都要执行 node index.js命令
+
+12.开启mongodb服务：
+
+            1.cmd命令进入 C:\Program Files\MongoDB\Server\4.1\bin 下
+
+            2. cmd执行 mongod  
+13.执行后端代码：
+
+    1.如涉及到mongodb数据库则：
+
+        1-1：开启nongodb服务(步骤12)
+
+        2-2: 进入到后端目录(service)下执行     node index.js
+
+
+13.进入数据库管理模式：
+
+    注意：访问文件如有权限问题请用管理员身份打开cmd(不懂查百度)，然后进入到C:\Program Files\MongoDB\Server\4.1\bin
+
+	1.开启nongodb服务(步骤12)
+
+	2.cmd输入命令： mongo  (出错则进入到安装mongodb目录里的bin目录下(C:\Program Files\MongoDB\Server\4.1\bin )执行cmd,请用管理员身份运行)
+	
+	注意：数据库管理模式中只能执行数据库命令,不能执行其它命令(node.js等命令)
+   
+    退出数据库管理模式： exit
+
+14.数据库常用命令: (即在终端操作数据库)
+
+	1.显示所有数据库列表: show dbs
+	
+	2.创建/进入数据库: use 数据库名
+	
+		如果数据库名不存在则创建,存在则进入
+		
+	3.查看当前数据库名: db
+	
+	4.删除数据库: db.dropDatabase()
+	
+	5.数据操作：
+	
+		1.添加数据: db.集合名.insert({JSON数据})
+		
+			1-1: db.user.insert({"name":"Marray","age":21})  //user为表名
+				//关系数据库的数据结构须一致(字段名),非关系数据库数据结构可以不一样
+				db.user.insert({"name":"Marray","password":"lfj93"}) 
+				 
+				//db.singer.insert({"name":"张三","age":20,"country":"中国"})
+
+			// 添加数据,如果数据存在则会更新数据(须有id),不推荐使用
+			1-2: db.user.save({"name":"Henrrey","password":"lfj01"})
+			
+		2.查找数据:
+		
+			2-1: db.user.find()		//查找user集合中所有数据
+			
+				按条件查:	db.user.find({符合条件对象})
+				
+						//查找名字为Henrrey的那条数据
+						db.user.find({"name":"Henrrey"})	
+						
+						//查询年龄大于18的数据
+						db.user.find({"age":{$gt: 18}})
+						
+						//查询年龄在15岁-30岁之间的
+						db.user.find({"age":{$gt: 15,$lt: 30}})
+						
+						(大于：$gt,大于等于：$gte，小于: $lt,小于等于: $lte)
+			
+			2-2: db.user.findOne()		//查找集合中的第一条数据
+			
+			2-3: db.user.find().pretty()  //格式化查询到的数据(数据显示更美观)
+			
+			// true则返回存在该字段的数据,false则返回不存在该字段的数据
+			2-4: db.user.find("字段名":{$exists: true|false}) 	
+			
+				
+		3.修改数据:
+		
+			//第一个参数是修改条件,第二个参数是修改内容(这条数据的所有内容修改为{"age":20},name没有了)
+			db.user.update({ "name" : "zhangsan"},{"age":20})
+			
+			//修改指定内容(不修改全部内容)
+			db.user.update({"name":"Marray"},{$set:{"password":"lfj09"}}) 
+			
+		4.删除数据
+		
+			//删除orders集合的所有数据，集合还存在，索引都还存在，相当与SQ的truncate命令
+			4-1: db.orders.remove({})
+	   	
+			////根据条件删除数据
+			4-2: db.orders.remove({"onumber": "001"}) 
+		
+	6.集合命令：
+	
+		1.显示当前数据库中的所有集合: show collections
+		
+		2.创建集合: db.集合名.insert({}); //通常在创建数据时，会自动创建集合
+		
+		3.删除集合: db.集合名.drop()
+	
+	7. mongoose的基本使用
+	
+		https://www.cnblogs.com/donve/p/10265087.html
+	
+	
+		
+	注意：
+	
+		1.数据库删除和更新需谨慎,操作前须备份数据库
+
+		2.空的数据库不会显示出来,插入数据才会显示出来(在自己的电脑上会出现这种情况)
+
+		3.代码更改后，浏览器不会自动刷新，要重新执行 node app(项目名) 运行项目并刷新浏览器页面
+	
+
+15.密码加密(service > database > schema > User.js文件)
+
+	1.密码加密(加密方法有很多,例如MD5,SHA 256...等)
+
+	2.密码加密虽然不容易被破解,但还是可以被破解,所以可以加盐处理
+
+		就是一个随机生成的字符串。我们将盐与原始密码连接（concat）在一起（放在前面或后面都可以），然后将concat后的字符串加密。
+
+		https://blog.csdn.net/qq_21508727/article/details/80718693
+
+16.加密加盐：npm install --save bcrypt
+
+17.koa2操作路由模块(获取操作数据)
+
+	路由文件都建立在 service > appApi目录下
+
+	17-1: 安装koa路由: npm install --save koa-router
+
+	17-2：新建user.js文件：service > appApi > user.js 
+
+		引入路由，注册接口
+
+18.路由模块文件引入到index.js里
+
+	1.装载所有子路由(定义路由)
+
+	2.加载路由中间件
+
+19.打通前后端通讯
+
+	注意: localhost:3000后端请求地址与前端请求数据地址https://www.easy-mock.com/mock/5cd983e0eebf633b5de54c57/smile-vue好像不能同时都配置在
+	vue.config.js里的跨域请求 proxy里,所以在 src 目录下创建uelApi.js(配置数据请求地址),vue文件使用需导入：
+
+		import url from "@/urlApi.js";
+
+	19-1. koa-bodyparser
+
+		1.安装koa-bodyparser中间件(用于获取post数据),service目录下安装： npm install --save koa-bodyparser	
+
+		2.service > index.js文件引入koa-bodyparser
+
+			const bodyParser = require("koa-bodyparser")
+			app.use(bodyParser())	
+
+
+	19-2. koa2-cors (解决跨域)
+
+		1.安装koa2-cors中间件解决跨域service目录下安装：npm install --save koa2-cors
+
+		2.service > index.js文件引入koa2-cors	
+
+			const cors = require("koa2-cors")
+			app.use(cors())	
+
+
+20.路由模块里插入(保存)数据到数据库(appApi > user.js)
+
+21.用户注册防重复提交处理
+
+	1.设置开关默认为false
+
+	2.第一次进入开关为true,为true则可以请求数据
+
+		注册成功则跳转到首页，注册失败开关则设为false
+
+22.用户注册验证逻辑编写
+
+23.用户登录页面编写login.vue
+
+	1.登录也要验证,验证规则与注册里的验证差不多
+
+	注意:
+
+		1.登录成功后进入其他页面在返回登录页面时还可以继续登录，所以页面初始化的时候需判断
+		用户是否已经登陆过
+
+
+24.database > schema > User.js文件里进行前端和数据库里的密码比较(使用bcrypt)
+
+25.service > appApi > user.js 编写用户登录接口
+
+26.
+
+
+
+
+
+

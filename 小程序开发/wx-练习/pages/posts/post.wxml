@@ -1,0 +1,9 @@
+<!--pages/posts/post.wxml-->
+<import src="post-item-template/post-item-template.wxml" />
+<view class="post">
+   <template is="post-item-template"></template>
+    <template is="post-item-template"></template>
+     <template is="post-item-template"></template>
+      <template is="post-item-template"></template>
+</view>
+

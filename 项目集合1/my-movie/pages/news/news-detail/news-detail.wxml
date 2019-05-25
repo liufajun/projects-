@@ -1,0 +1,20 @@
+<!--pages/news/news-detail/news-detail.wxml-->
+<view class="news-detail-container">
+   <image class="head-img" src="{{articleimg}}"></image>
+   <view class="author-info">
+      <image class="author-avatar" src="../../../images/head1.png"></image>
+      <text class="author-name">{{author}}</text>
+      <text class="const-text">发表于</text>
+      <text class="time">{{dataTime}}</text>
+      <image id="playerMusic" class="playerMusic" bindtap='onPlayerMusic' src="{{ musicFlag ? '../../../images/eartag.png' : '../../../images/earphone.png'}}"></image>
+   </view>
+   <text class="title">{{title}}</text>
+   <view class="tool">
+      <view class="circle-img">
+         <image catchtap='collectTap' wx:if="{{collected}}" src="../../../images/sch.png"></image>
+         <image catchtap='collectTap' wx:else src="../../../images/sc.png"></image>
+         <image catchtap="onShareTap" class="share-img" src="../../../images/fx.png"></image>
+      </view>
+   </view>
+   <text class="detail">{{detail}}</text>
+</view>

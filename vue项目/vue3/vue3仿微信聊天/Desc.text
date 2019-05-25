@@ -1,0 +1,42 @@
+1.解压文件后端接口代码.zip(解压后是my-ele-app文件夹)
+2. 进入my-ele-app文件夹安装后端依赖包: cnpm install
+
+3.package.json配置说明:
+
+        {
+            "name": "app",
+            "version": "1.0.0",
+            "main": "server.js",
+            "scripts": {
+                "test": "echo \"Error: no test specified\" && exit 1",
+                "client-install": "npm install --prefix client",
+                "client": "npm start --prefix client",
+                "socket": "nodemon webSocket.js",
+                "start": "node server.js",
+                "server": "nodemon server.js",
+                "dev": "concurrently \"npm run server\" \"npm run socket\" \"npm run client\""
+                /*
+                    npm run server: 运行后台代码命令(注意： 是在my-ele-app文件夹下运行)
+                    npm run client: 运行前端代码命令(client是项目名)
+                    注意：
+                            前端代码和后台代码在终端里只能运行一个,要同时运行需安装concurrently: cnpm install concurrently -D
+                    npm run dev: 同时运行前端和后台代码命令
+                */
+            },
+            "author": "fajun",
+            "license": "ISC",
+            "description": "",
+            "dependencies": {
+                "axios": "^0.18.0",
+                "bcryptjs": "^2.4.3",
+                "body-parser": "^1.18.3",
+                "concurrently": "^4.0.1",
+                "express": "^4.16.3",
+                "gravatar": "^1.6.0",
+                "jsonwebtoken": "^8.3.0",
+                "mongoose": "^5.2.15",
+                "passport": "^0.4.0",
+                "passport-jwt": "^4.0.0",
+                "ws": "^6.0.0"
+            }
+        }

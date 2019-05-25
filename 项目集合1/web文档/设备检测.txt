@@ -1,0 +1,99 @@
+﻿0.window对象事件:onload,onresize(事件会在窗口或框架被调整大小时发生),onscroll
+1.注意：在脚本中引入device.js文件会出错(不知道为什么)，一定要引入device.min.js文件。
+		编写的脚本放在紧挨着body结束标签会带来不好的用户体验(文件是从上往下依次渲染，
+			如果把dom元素先加载了再加载脚本来判断是属于哪种设备然后再跳转页面，这会浪费用户的流量)
+		不要把脚本写在window.onload=functuon(){}方法里：
+			这是延迟加载，加载完dom后再执行这个方法体
+2.使用device.min.js检测设备
+						Device(设备)				JavaScript Method(js方法)
+						
+						Mobile					device.mobile()
+						Tablet					device.tablet() //平板(7寸以上)
+						iOS						device.ios()
+						iPad					device.ipad()
+						iPhone					device.iphone()
+						iPod					device.ipod()
+						Android					device.android()
+						Android Phone			device.androidPhone()
+						Android ablet			device.androidTablet()
+						BlackBerry				device.blackberry()
+						BlackBerry 	Phone		device.blackberryPhone()
+						BlackBerry Tablet		device.blackberryTablet()
+						Windows					device.windows()
+						Windows Phone			device.windowsPhone()
+						Windows Tablet			device.windowsTablet()
+						Firefox OS				device.fxos()
+						Firefox OS Phone		device.fxosPhone()
+						Firefox OS Tablet		device.fxosTablet()
+						MeeGo					device.meego()
+						
+						**设备方向**
+						Landscape(横向)         device.landscape()
+						Portrait(纵向)           device.portrait()  
+
+3.可以用来控制当为mobile或者tablet的时候加载m.css, PC的时候加载pc.css
+		if(isMobile | isTable){
+		        document.write( ' <link rel="stylesheet" href="m.css">');
+		    }
+		    else{
+		        document.write('<link rel="stylesheet" href="pc.css">');
+		    }
+4.
+		<body>
+		    <script type="text/javascript">
+		        var isMobile = device.mobile(),
+		             isTable = device.tablet();
+		
+		        if(isMobile || isTable){
+		            window.open("m.html","_self"); //如果终端是手机或者平板，就打开m.html
+		        }
+		        else{
+		            window.open("desk.html","_self"); //否则打开desk.html
+		        }
+		    </script>
+		</body>
+		
+5.使用媒体查询中的orientation属性来区别横屏和竖屏:
+			<link rel="stylesheet" media="screen and (orientation:portrait)" href="portrait.css" />  
+			<link rel="stylesheet" media="screen and (orientation:landscape)" href="landscape.css" />  
+					说明：screen(屏幕设备，media中有screen则指示为屏幕设备下加载css样式)
+6.注意：元素中的百分比都是与父元素的宽度比(width，margin-left,paddig-left的设置都与父元素的宽度有关)；
+		一般情况下只有width,margin-left/right,padding-left/right才设置百分比；
+		注意：边框border宽度用百分比设置是无效的
+		一般情况下height,padding-top/bottom,margin-top/bottom是设置固定像素单位
+7.js实现设备检测:
+var MobileUA = (function () {
+    var ua = navigator.userAgent.toLowerCase();
+
+    var mua = {
+        IOS: /ipod|iphone|ipad/.test(ua), //iOS  
+        IPHONE: /iphone/.test(ua), //iPhone  
+        IPAD: /ipad/.test(ua), //iPad  
+        ANDROID: /android/.test(ua), //Android Device  
+        WINDOWS: /windows/.test(ua), //Windows Device  
+        TOUCH_DEVICE: ('ontouchstart' in window) || /touch/.test(ua), //Touch Device  
+        MOBILE: /mobile/.test(ua), //Mobile Device (iPad)  
+        ANDROID_TABLET: false, //Android Tablet  
+        WINDOWS_TABLET: false, //Windows Tablet  
+        TABLET: false, //Tablet (iPad, Android, Windows)  
+        SMART_PHONE: false //Smart Phone (iPhone, Android)  
+    };
+
+    mua.ANDROID_TABLET = mua.ANDROID && !mua.MOBILE;
+    mua.WINDOWS_TABLET = mua.WINDOWS && /tablet/.test(ua);
+    mua.TABLET = mua.IPAD || mua.ANDROID_TABLET || mua.WINDOWS_TABLET;
+    mua.SMART_PHONE = mua.MOBILE && !mua.TABLET;
+
+    return mua;
+}());
+//SmartPhone   
+if (MobileUA.SMART_PHONE) {
+    // 移动端链接地址  
+    url = url.replace('Home', 'Mobile');
+    
+    document.location.href = url;
+
+} else {
+    
+}
+

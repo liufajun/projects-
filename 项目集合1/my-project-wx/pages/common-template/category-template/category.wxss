@@ -1,0 +1,12 @@
+.category{padding:40rpx 20rpx;display:flex;}
+.drink{height: 100rpx;flex:1;background-color:pink;text-align: center;
+font-family: "微软雅黑";padding-top: 8rpx;box-sizing: border-box;}
+.tea{margin-right: 20rpx;}
+.drink-title{font-size:30rpx;font-weight: 700;vertical-align: middle;}
+.circl{display:inline-block;padding:0 4rpx;position:relative;top:-30rpx;
+   font-size:34rpx;vertical-align:middle;margin-top:0;height:10rpx;
+}
+.line{text-align: center;width: 70rpx;margin:7rpx auto 16rpx}
+.line-item1{width:50%;height:4rpx;background-color: #fff;float:left;}
+.line-item2{width:50%;height:4rpx;background-color: #000;float:right;}
+.drink-text{font-size:22rpx;color:#fff;}

@@ -1,0 +1,215 @@
+html{
+    font-size: calc( 100vw / 7.5 );
+}
+.main_jb2
+    animation wobble 1s linear 0 infinite;
+.win1
+    background: rgba(0,0,0,0.6);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    .winBody2
+        width: 100%;
+        height: auto;
+        padding-top: .6rem;
+        margin: 0 auto ;
+        background: url('img/new_year_icon2.png') no-repeat;
+        background-size: 100% auto;
+        animation: title1 0.3s linear;
+        position: relative;
+        .receive1-bg1
+            width: 5.193rem;
+            height: 9rem;
+            margin: 0 auto;
+            background: url(img/new_year_icon3.png) no-repeat;
+            background-size: 100% 100%;
+            position: relative;
+            z-index: 3;
+            .receive1-head
+                padding: 1rem 0 1rem;
+                h1
+                    text-align: center;
+                    font-size: 0.52rem;
+                    color: #ff3636;
+            .receive1-body
+                p
+                    font-size: 0.4rem;
+                    line-height: 1.5;
+                    text-align: center;
+                    color: #fff;
+            .receive1-but1
+                margin: 0.4rem auto;
+                display: block;
+                border: none;
+                width: 3rem;
+                height: 1rem;
+                background: url('img/new_year_but2.png') no-repeat;
+                background-size: 100% 100%;
+                z-index: 5;
+                text-align: center;
+                font-size: 0.48rem;
+                color: #986300;
+                font-weight: bold;
+                position: relative;
+            .receive1-bg2
+                width: 5rem;
+                height: 2.17rem;
+                margin: 0 auto;
+                background: url(img/money_icon4.png) no-repeat;
+                background-size: 100% 100%;
+                position: absolute;
+                bottom: -0.78rem;
+                left: -0.7rem;
+                z-index: 4;
+
+
+
+// .main_jb2
+//     animation wobble 1s linear 0 infinite;
+// .win1
+//     background: rgba(0,0,0,0.6);
+//     width: 100%;
+//     height: 100%;
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     overflow-x: hidden;
+//     .winBody2
+//         width: 100%;
+//         height: auto;
+//         padding-top: 30px;
+//         margin: 0 auto ;
+//         background: url('img/new_year_icon2.png') no-repeat;
+//         background-size: 100% auto;
+//         animation: title1 0.3s linear;
+//         position: relative;
+//         .receive1-bg1
+//             width: 300px;
+//             height: 520px;
+//             margin: 0 auto;
+//             background: url('img/new_year_icon3.png') no-repeat;
+//             background-size: 100% 100%;
+//             position: relative;
+//             z-index: 3;
+//             .receive1-head
+//                 padding: 30% 0;
+//                 h1
+//                     text-align: center;
+//                     font-size: 26px;
+//                     line-height: 30px;
+//                     color: #ff3636;
+//             .receive1-body
+//                 p
+//                     font-size: 20px;
+//                     line-height: 30px;
+//                     text-align: center;
+//                     color: #fff;
+//             .receive1-but1
+//                 margin:20px auto;
+//                 display: block;
+//                 border: none;
+//                 width: 160px;
+//                 height: 51px;
+//                 background: url('img/new_year_but2.png') no-repeat;
+//                 background-size: 100% 100%;
+//                 z-index: 5;
+//                 text-align: center;
+//                 font-size: 24px;
+//                 color: #986300;
+//                 font-weight: bold;
+//                 position: relative;
+//             .receive1-bg2
+//                 width: 400px;
+//                 height: 166px;
+//                 margin: 0 auto;
+//                 background: url('img/money_icon4.png') no-repeat;
+//                 background-size: 100% 100%;
+//                 position: absolute;
+//                 bottom: -60px;
+//                 left: -110px;
+//                 z-index: 4;
+
+
+
+
+
+
+
+
+
+
+@keyframes title1 {
+
+    from {
+
+        opacity:0;
+
+        transform:scale(0, 0);
+
+    }
+
+    to {
+
+        opacity:1;
+
+        transform:scale(1, 1);
+
+    }
+
+}
+@-webkt-keyframes title1 {
+
+    from {
+
+        opacity:0;
+
+        -webkit-transform:scale(0, 0)
+
+    }
+
+    to {
+
+        opacity:1;
+
+        -webkit-transform:scale(1, 1)
+
+    }
+
+}
+@keyframes wobble {
+    0% {
+        transform:rotateY(0deg) rotateX(0deg) rotateZ(0deg) translateZ(0px);
+    }
+    25% {
+        transform:rotateY(90deg) rotateX(0deg) rotateZ(0deg) translateZ(0px);
+    }
+    50% {
+        transform:rotateY(180deg) rotateX(0deg) rotateZ(0deg) translateZ(0px);
+    }
+    75% {
+        transform:rotateY(90deg) rotateX(0deg) rotateZ(0deg) translateZ(0px);
+    }
+    100% {
+        transform:rotateY(0eg) rotateX(0deg) rotateZ(0deg) translateZ(0px);
+    }
+}
+@-webkit-keyframes wobble {
+    0% {
+        -webkit-transform:rotateY(0deg) rotateX(0deg) rotateZ(0deg) translateZ(0px);
+    }
+    25% {
+        -webkit-transform:rotateY(90deg) rotateX(0deg) rotateZ(0deg) translateZ(0px);
+    }
+    50% {
+        -webkit-transform:rotateY(180deg) rotateX(0deg) rotateZ(0deg) translateZ(0px);
+    }
+    75% {
+        -webkit-transform:rotateY(90deg) rotateX(0deg) rotateZ(0deg) translateZ(0px);
+    }
+    100% {
+        -webkit-transform:rotateY(0deg) rotateX(0deg) rotateZ(0deg) translateZ(0px);
+    }
+}

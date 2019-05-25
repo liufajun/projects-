@@ -1,0 +1,21 @@
+<template name="tmp">
+    <view class="articleList" >
+        <view class="author-info">
+            <image class="author-icon" src=""></image>
+            <text class="author-name">{{item.author}}</text>
+            <text class="author-date">{{item.time}}</text>
+        </view>
+        <view class="news-list">
+            <view class="news-title">{{item.title}}</view>
+            <image class="news-img" src=""></image>
+            <text class="news-text">{{item.articletext}}</text>
+            <view class="news-list-bottom">
+                <image src="../../images/sc.png" class="news-like-icon"></image>
+                <text class="news-like-text">{{item.like_start}}</text>
+                <image class="news-like-icon" src="../../images/fx.png"></image>
+                <text class="news-like-text">{{item.like_num}}</text>
+            </view>
+        </view>
+    </view>
+    <view>1234598480</view>
+</template>

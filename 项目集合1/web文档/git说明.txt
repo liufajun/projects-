@@ -1,0 +1,138 @@
+				gulp安装
+1. 全局安装 gulp：
+	$ npm install --global gulp
+2. 作为项目的开发依赖（devDependencies）安装：
+	$ npm install --save-dev gulp
+		
+			    gulp-sass安装
+
+1、首先全局环境下配置淘宝镜像（**注意：这里是全局环境，不是项目根目录）
+执行语句：npm install -g cnpm --registry=https://registry.npm.taobao.org
+
+2、进入项目根目录安装：cnpm install --save-dev node-sass
+
+3、仍然是项目根目录，安装： npm install --save-dev gulp-sass
+
+		     sass/less命令行编译成css
+
+1-1.sass转换成css:  sass style.scss style.css
+1-2.单文件监听命令:  sass --watch style.scss:style.css
+1-3.文件夹监听命令:  sass --watch sassFileDirectory:cssFileDirectory
+1-4.css文件转成sass/scss文件（在线转换工具css2sass）
+	sass-convert style.css style.sass   
+	sass-convert style.css style.scss
+1-5.css的四种格式:  nested，expanded，compact，compressed。
+2.less：lessc style.less > style.css 
+
+			git基本使用(按照一下顺序执行就可以大致的掌握git)
+
+1.在项目根目录下新建 .gitignore文件(windows系统中要用cmd命令来新建：
+
+	  	echo '' >> .gitignore
+
+		echo "# CSS-Responsive" >> README.md
+
+		gitignore文件用来忽略跟踪文件夹(里面写文件夹名)
+
+   		cmd命令新建.开头的文件夹: mkdir .git)
+
+2. git init  使用以下命令需在项目根目录下创建git仓库
+
+3. git remote add origin http://github....(添加远程仓库即github仓库地址;
+   remote:git服务器，origin--远程仓库地址别名)(创建本地仓库时使用这个命令)
+
+4. git add  (跟踪文件或文件夹,只有跟中了的文件或文件夹在推送到远程的时候才能成功上传)
+	git add .和git add --all都是跟踪目录下的所有文件,文件夹
+
+5. git commit -m '第一次提交' (以二进制的形式保存)
+
+	git status -s查看本地仓储的变更状态(不建议使用git status)
+	 
+	git diff  对比差异
+
+	git log  查看提交日志
+
+	git reset --hard (哈希值前面六位数)恢复到指定的版本
+
+	git help(查看git所有指令)
+
+7. git push -u origin master (把本地主分支推送到github仓库,github会自动创建主分支。
+
+	强制推送：git push -u origin master -f
+
+	注：推送前一定要通过跟踪文件
+
+   -u:让文件以流的形式传递,传送速度快些--不加-u也可以，但传送速度慢)
+
+注意：写项目之前执行以下步骤：
+
+	git pull --rebase origin master (代码合并,不行的话试一下这个命令：
+	
+		git pull origin master --allow-unrelated-histories )
+
+	git add 
+
+	git commit -m ''
+
+	//推送到主分支
+	git push -u origin master (master是主分支)
+	
+	//推送到其它分支
+	git push -u origin brachs (其它分支,非主分支)
+
+
+
+
+8. git branch 分支名  (创建本地分支)
+	
+	git branch  (查看分支)	
+
+9. git checkout 分支名  (切换到分支)
+	
+	注：团队协作一般都是通过创建分支来开发项目，并把分支推送到远程仓库，最后再合并
+
+10. git push -u origin 分支名  (把分支推送到远程仓库github上，github会自己创建推送的分支) 
+
+11. git merge 分支名  （分支合并,是合并到主分支master上） 
+
+           github页面托管(page.github.com) -->(Github Page仅支持静态页面)
+
+1.在github中创建一个新的仓库
+
+2.把本地项目推送到该仓库中
+
+2.然后选择GitHub Pages标题下的Change theme按钮选择一个主题他好像会自动生成一个GitHub Pages地址(就可以访问他了)
+
+				git分支
+
+创建本地分支：  Git branch mybranch 
+切换到本地分支： git checkout mybranch 
+创建并切换分支： git checkout -b mybranch
+本地分支push到gitHub(会在远程仓库里创建一个分支): git push origin mybranch
+更新master主线上的东西到该分支上：git rebase master
+切换到master分支：git checkout master
+更新mybranch分支上的东西到master上：git rebase mybranch
+提交：git commit -m '自定义内容'
+对最近一次commit的进行修改：git commit -a –amend
+commit之后，如果想撤销最近一次提交(即退回到上一次版本)并本地保留代码：git reset HEAD^
+合并分支：(merge from) $ git checkout master
+$ git merge mybranch (merge from mybranch)
+删除本地分支： $ git branch -d mybranch 
+强制删除分支： $ git branch -D mybranch
+列出所有分支： $ git branch
+列出所有分支(加上-a参数可以查看远程分支，远程分支会用红色表示出来（如果你开了颜色支持的话）)：git branch -a
+查看各个分支最后一次提交： $ git branch -v
+查看哪些分支合并入当前分支： $ git branch –merged
+查看哪些分支未合并入当前分支： $ git branch –no-merged
+更新远程库到本地： $ git fetch origin
+推送分支：  git push origin mybranch
+取远程分支合并到本地： $ git merge origin/mybranch
+取远程分支并分化一个新分支： $ git checkout -b mybranch origin/mybranch
+删除远程分支：git push origin :mybranch 或者 git push origin --delete <branchName>
+删除不存在对应远程分支的本地分支: git fetch -p
+
+liufajun网易邮箱账号:liufajun1993@163.com;
+
+移动邮箱账号:18181849984@139.com;密码：Liufajun1993
+
+

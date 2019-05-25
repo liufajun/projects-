@@ -1,0 +1,58 @@
+  集成环境开发(使用ajax时要用到php服务器环境搭建-->WampServer)
+        
+        1.安装WampServer过程百度一下
+        
+        .安装目录为D盘下时会自动出现一个wamp文件夹aaa
+
+        .把数据文件放在D:\wamp\www文件夹下
+
+        .左击wampserver图标(笔记本是在右下角的显示隐藏菜单栏里)启动服务
+
+        .左击wampserver图标(笔记本是在右下角的显示隐藏菜单栏里)的localhost
+
+         就会在你安装wamp时设置打开文件的浏览器里弹出一个界面,localhost代表路径 D:\wamp\www
+
+            例如：D:/wamp/www/wos.txt文件要在浏览器打开时可以输入localhost/wos.txt
+
+            需开启服务器通过服务器环境在浏览器中打开编写的html文件例如：(localhost/wamp/btn.html)
+
+                $("#testAjax").click(function(){
+                        
+                        $.ajax({
+
+                                type: "POST",//请求方式，默认为get
+
+                                url: "test.php",//发送请求的地址
+
+                                data: "name=garfield&age=18",//发送到服务器的数据。将自动转换为请求字符串格式。
+
+                                dataType:"jsonp",//服务器返回的数据类型,跨域的话一定要设置为jsonp否则不能跨域
+                                
+                                //指定jsonpCallback时可以将回掉函数写在ajax外面做其他操作，不指定时不能这样做，只能在success里做操作
+                                jsonpCallback: 'handleResponse',
+                                
+                                //由服务器返回，并根据 dataType 参数进行处理后的数据
+                                success: function(data){
+                                        $("#myDiv").html('<h2>'+data+'</h2>');
+                                }
+                        });
+                        
+                });
+
+        数据格式有三种: xml(不用),html(不用),json(轻量级的数据交换格式,常用)
+
+       注意： 参数url的请求地址例如：user.php,user.txt等。请求文件以.json为后缀名的文件中设置json字符串数据
+        会出错(不知道为啥),以.txt文件为后缀的文件中设置的数据格式好像都可以在页面上显示(例如纯文本,json字符串)
+        注意：怎样把json字符串里的数据显示在页面上？
+                我是在.txt为后缀的文件里设置数据如下：
+                        {
+                                "name":"张三",
+                                "age":"18"
+                        }
+                然后要将json字符串转换为json对象:
+
+                        var obj = JSON.parse(str);
+
+                最后显示在页面上：
+
+                        $("#myDiv").html('<h2>'+obj.name+'</h2>');
