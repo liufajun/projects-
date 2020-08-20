@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "cluster": "^0.7.7",
     "core-js": "^2.6.5",
     "dns": "^0.2.2",
